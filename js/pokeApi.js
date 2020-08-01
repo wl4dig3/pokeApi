@@ -16,26 +16,65 @@ function buscarPokemon() {
       };
       pokemones.push(pokemon);
       console.log(pokemones);
-    //   limpiar el html 
-      $("#cuerpo").html("");
+    //   limpia el html 
+      $("#contenedor").html("");
       // funcion iteradora 
       pokemones.forEach((p, i) => {
-        $("#cuerpo").append(`
-        <div class="col-4 bordes">
+        $("#contenedor").append(`
+        <div class="col-3 bordes">
             <p><img src="${p.img}" width="150" class="d-block m-auto"/></p>
-          <p class='text-center m-0'>numero:${i + 1}</p>
-          <p class='text-center m-0'>pokedex: ${p.pokedex}</p>
-          <p class='text-center m-0'>nombre: ${p.nombre}</p>
-          <p class='text-center m-0'>puntos de ataque: ${p.ataque}</p>
-          <p class='text-center m-0'>puntos de vida: ${p.hp}</p>
-          <p class='text-center m-0'>puntos de defensa: ${p.defensa}</p> 
-          <p class='text-center m-0'>velocidad: ${p.velocidad}</p>
-          </div>
-          `);
+            <p class='text-center m-0'>numero:${i + 1}</p>
+            <p class='text-center m-0'>nombre: ${p.nombre}</p>
+            <p class='text-center m-0'>pokedex: ${p.pokedex}</p>
+            <p class='text-center m-0'>puntos de vida: ${p.hp}</p>
+            <p class='text-center m-0'>puntos de ataque: ${p.ataque}</p>
+            <p class='text-center m-0'>velocidad: ${p.velocidad}</p>
+            <p class='text-center m-0'>puntos de defensa: ${p.defensa}</p> 
           
+          <button onclick= "statistics(${p.ataque}, ${p.hp}, ${p.defensa}, ${p.velocidad})" 
+            type="button" class="btn btn-primary btn-sm btn-block mb-1" data-toggle="modal" data-target="#graphiPoke">
+            Ver Gráfica
+          </button>
+          
+        </div>
+          `
+          );
+          
+        });
             
            
-      });
     }
   });
 }
+
+// function y carga de canvas.js
+
+function statistics(ataque, hp, defensa, velocidad) {
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        theme: "light1", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            text: "Desktop Browser Market Share in 2016"
+        },
+        data: [{
+            type: "pie",
+            startAngle: 25,
+            toolTipContent: "<b>{label}</b>: {y}%",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 16,
+            indexLabel: "{label} - {y}%",
+            dataPoints: [
+                { y: ataque, label: "Ataque" },
+                { y: hp, label: "Puntos de Vida" },
+                { y: defensa, label: "Defensa" },
+                { y: velocidad, label: "Velocidad" }
+
+            ]
+        }]
+    });
+    chart.render();
+    
+    }
