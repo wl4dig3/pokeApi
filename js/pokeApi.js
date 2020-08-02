@@ -15,10 +15,10 @@ function buscarPokemon() {
         img: result.sprites.front_default
       };
       pokemones.push(pokemon);
-      console.log(pokemones);
-    //   limpia el html 
+    //   console.log(pokemones);
+    //   limpia el html ***
       $("#contenedor").html("");
-      // funcion iteradora 
+      // funcion iteradora ***
       pokemones.forEach((p, i) => {
         $("#contenedor").append(`
         <div class="col-3 bordes">
@@ -32,13 +32,13 @@ function buscarPokemon() {
             <p class='text-center m-0'>puntos de defensa: ${p.defensa}</p> 
           
           <button onclick= "statistics(${p.ataque}, ${p.hp}, ${p.defensa}, ${p.velocidad})" 
-            type="button" class="btn btn-primary btn-sm btn-block mb-1" data-toggle="modal" data-target="#graphiPoke">
-            Ver Gráfica
+            type="button" class="btn btn-primary btn-sm btn-block mb-1" data-toggle="modal" data-target="#modalPoke">
+            Ver Estadisticas
           </button>
+          </div>
+            `
+            );
           
-        </div>
-          `
-          );
           
         });
             
@@ -47,16 +47,16 @@ function buscarPokemon() {
   });
 }
 
-// function y carga de canvas.js
+// function  canvas.js ***
 
 function statistics(ataque, hp, defensa, velocidad) {
 
     var chart = new CanvasJS.Chart("chartContainer", {
-        theme: "light1", // "light1", "light2", "dark1", "dark2"
+        theme: "dark1", // "light1", "light2", "dark1", "dark2"
         exportEnabled: true,
         animationEnabled: true,
         title: {
-            text: "Desktop Browser Market Share in 2016"
+            text: "Pokemones at 2020 consult"
         },
         data: [{
             type: "pie",
@@ -78,3 +78,7 @@ function statistics(ataque, hp, defensa, velocidad) {
     chart.render();
     
     }
+    
+    axios.get('https://pokeapi.co/api/v2/pokemon').then( data => {
+        console.log('data')
+    })

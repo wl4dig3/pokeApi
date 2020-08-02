@@ -2,7 +2,7 @@ body{
     background-image: url(../img/pokeBg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .bordes {
