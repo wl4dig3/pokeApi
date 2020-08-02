@@ -4,7 +4,7 @@ function buscarPokemon() {
   let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   $.ajax({
     url,
-    success: function(result) {
+    success: (result) => {
       let pokemon = {
         pokedex: result.id,
         nombre: result.name,
@@ -79,6 +79,10 @@ function statistics(ataque, hp, defensa, velocidad) {
     
     }
     
-    axios.get('https://pokeapi.co/api/v2/pokemon').then( data => {
+    let nuevaCons = axios.get('https://pokeapi.co/api/v2/pokemon').then( data => {
         console.log('data')
     })
+    const saludo = () => {
+        console.log('hola')
+    }
+    
